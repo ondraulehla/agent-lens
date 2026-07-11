@@ -1,0 +1,402 @@
+/* Design tokens — reference dataviz palette (validated light & dark). */
+:root {
+  --surface-1: #fcfcfb;
+  --page: #f9f9f7;
+  --text-primary: #0b0b0b;
+  --text-secondary: #52514e;
+  --text-muted: #898781;
+  --grid: #e1e0d9;
+  --baseline: #c3c2b7;
+  --border: rgba(11, 11, 11, 0.1);
+  --critical: #d03b3b;
+  --good: #006300;
+  --series-1: #2a78d6;
+  --series-2: #1baf7a;
+  --series-3: #eda100;
+  --series-4: #008300;
+  --series-5: #4a3aa7;
+  --series-6: #e34948;
+  --series-7: #e87ba4;
+  --series-8: #eb6834;
+  --accent: #2a78d6;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --surface-1: #1a1a19;
+    --page: #0d0d0d;
+    --text-primary: #ffffff;
+    --text-secondary: #c3c2b7;
+    --text-muted: #898781;
+    --grid: #2c2c2a;
+    --baseline: #383835;
+    --border: rgba(255, 255, 255, 0.1);
+    --critical: #d03b3b;
+    --good: #0ca30c;
+    --series-1: #3987e5;
+    --series-2: #199e70;
+    --series-3: #c98500;
+    --series-4: #008300;
+    --series-5: #9085e9;
+    --series-6: #e66767;
+    --series-7: #d55181;
+    --series-8: #d95926;
+    --accent: #3987e5;
+    color-scheme: dark;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: var(--page);
+  color: var(--text-primary);
+  font: 15px/1.5 system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+.shell {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 24px 20px 80px;
+}
+
+header.top {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 8px 0 20px;
+}
+.brand {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+.brand span {
+  color: var(--accent);
+}
+.tagline {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* --- drop zone ------------------------------------------------------------ */
+.dropzone {
+  border: 1.5px dashed var(--baseline);
+  border-radius: 16px;
+  background: var(--surface-1);
+  padding: 64px 32px;
+  text-align: center;
+  transition: border-color 0.15s, background 0.15s;
+}
+.dropzone.over {
+  border-color: var(--accent);
+}
+.dropzone h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+}
+.dropzone p {
+  margin: 0 auto;
+  max-width: 46ch;
+  color: var(--text-secondary);
+}
+.dropzone .hint {
+  color: var(--text-muted);
+  font-size: 13px;
+  margin-top: 20px;
+}
+.actions {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 24px;
+}
+button.primary,
+label.primary {
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  font: 600 14px system-ui, sans-serif;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+button.ghost {
+  background: none;
+  border: 1px solid var(--baseline);
+  color: var(--text-primary);
+  font: 600 14px system-ui, sans-serif;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+button:focus-visible,
+label:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* --- stat tiles ------------------------------------------------------------- */
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin: 18px 0;
+}
+.tile {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+}
+.tile .k {
+  color: var(--text-muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.tile .v {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  margin-top: 2px;
+}
+.tile .v small {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+.tile.bad .v {
+  color: var(--critical);
+}
+
+/* --- panels ------------------------------------------------------------------ */
+.panel {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 18px;
+  margin: 14px 0;
+}
+.panel h2 {
+  margin: 0 0 4px;
+  font-size: 15px;
+}
+.panel .sub {
+  color: var(--text-muted);
+  font-size: 12.5px;
+  margin: 0 0 12px;
+}
+
+/* legend */
+.legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  margin-bottom: 12px;
+  font-size: 12.5px;
+  color: var(--text-secondary);
+}
+.legend .item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  flex: none;
+}
+
+/* --- timeline ------------------------------------------------------------------ */
+.timeline {
+  position: relative;
+}
+.lane {
+  display: grid;
+  grid-template-columns: 170px 1fr;
+  align-items: center;
+  gap: 10px;
+  min-height: 22px;
+}
+.lane + .lane {
+  border-top: 1px solid var(--grid);
+}
+.lane .who {
+  color: var(--text-secondary);
+  font-size: 12px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.lane .track {
+  position: relative;
+  height: 22px;
+}
+.bar {
+  position: absolute;
+  top: 5px;
+  height: 12px;
+  min-width: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.bar.err {
+  outline: 2px solid var(--critical);
+  outline-offset: 1px;
+}
+.turn-sep {
+  border-top: 1px solid var(--baseline) !important;
+}
+.axis {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 11px;
+  font-variant-numeric: tabular-nums;
+  border-top: 1px solid var(--baseline);
+  padding-top: 4px;
+  margin-top: 2px;
+  margin-left: 180px;
+}
+
+/* --- tool breakdown ---------------------------------------------------------------- */
+.tools .row {
+  display: grid;
+  grid-template-columns: 120px 1fr 150px;
+  gap: 10px;
+  align-items: center;
+  padding: 5px 0;
+}
+.tools .name {
+  font-size: 13px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.tools .track {
+  height: 12px;
+  position: relative;
+}
+.tools .fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  border-radius: 4px;
+  min-width: 3px;
+}
+.tools .val {
+  font-size: 12.5px;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+.tools .val b {
+  color: var(--text-primary);
+}
+.err-note {
+  color: var(--critical);
+  font-weight: 600;
+}
+
+/* --- inspector -------------------------------------------------------------------- */
+.events details {
+  border-top: 1px solid var(--grid);
+}
+.events summary {
+  display: grid;
+  grid-template-columns: 14px 92px 1fr auto;
+  gap: 10px;
+  align-items: baseline;
+  padding: 7px 4px;
+  cursor: pointer;
+  list-style: none;
+  font-size: 13px;
+}
+.events summary::-webkit-details-marker {
+  display: none;
+}
+.events .dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  align-self: center;
+}
+.events .kind {
+  color: var(--text-muted);
+  font-size: 11.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.events .lbl {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--text-secondary);
+}
+.events .t {
+  color: var(--text-muted);
+  font-size: 11.5px;
+  font-variant-numeric: tabular-nums;
+}
+.events pre {
+  margin: 0 4px 10px 116px;
+  padding: 10px 12px;
+  background: var(--page);
+  border: 1px solid var(--grid);
+  border-radius: 8px;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text-secondary);
+  max-height: 320px;
+  overflow: auto;
+}
+
+/* --- tooltip ------------------------------------------------------------------------ */
+.tooltip {
+  position: fixed;
+  z-index: 30;
+  pointer-events: none;
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.18);
+  border-radius: 8px;
+  padding: 8px 11px;
+  font-size: 12.5px;
+  max-width: 340px;
+}
+.tooltip .tt-title {
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.tooltip .tt-body {
+  color: var(--text-secondary);
+}
+.tooltip .tt-meta {
+  color: var(--text-muted);
+  font-size: 11.5px;
+  margin-top: 3px;
+  font-variant-numeric: tabular-nums;
+}
+
+.warnings {
+  color: var(--text-muted);
+  font-size: 12.5px;
+  margin: 8px 2px;
+}
+footer.foot {
+  margin-top: 28px;
+  color: var(--text-muted);
+  font-size: 12.5px;
+  text-align: center;
+}
+footer.foot a {
+  color: var(--text-secondary);
+}
